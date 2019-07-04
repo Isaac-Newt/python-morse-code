@@ -14,3 +14,8 @@ This is a morse code transcriber built using Python 3, with a GTK3 UI using Pyth
 - GTK+3 >= 3.22 (i.e. Ubuntu >= 18.04, Debian >= 9, openSUSE >= 15.0)
 
 - PyGObject (i.e. Ubuntu: python3-gi, openSUSE: python3-gobject)
+
+
+## License
+
+This project is licensed under the Mozilla Public Licence v. 2.0.
