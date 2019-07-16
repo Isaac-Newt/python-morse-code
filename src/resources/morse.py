@@ -37,6 +37,7 @@ class Coder:
 
             # Add letter to the tree
             self.follow_and_insert(code, letter)
+            print(letter)
 
     def follow_and_insert(self, code_str: str, letter: str):
         """Follow the tree and insert a letter"""
@@ -81,19 +82,22 @@ class Coder:
         left_tree = tree.get_child_left()
         right_tree = tree.get_child_right()
 
-        if left_tree is None:
+        # If no more children, raise error
+        if (left_tree is None) and (right_tree is None):
             raise ValueError(error)
+
+        # If letter is found, return path
         if left_tree.get_root_val() == letter:
-            path += "."
+            path = path + "."
             return path
-        if right_tree is None:
-            raise ValueError(error)
         if right_tree.get_root_val() == letter:
-            path += "-"
+            path = path + "-"
             return path
-        # else:
+
+        # If not found, and children exist, keep looking
         left_path = path + "."
         right_path = path + "-"
+
         try:
             return self.find_path(left_tree, letter, left_path)
         except:
@@ -126,10 +130,17 @@ class Coder:
 
 def main():
     """Function to test Coder functionality"""
-    morse_coder = Coder("resources/morse.txt")
+    morse_coder = Coder("morse.txt")
+    print(morse_coder)
     print("Encoding 'sos'")
     print("Expected: ... --- ...")
     print("Encoded : {}".format(morse_coder.encode("sos")))
+    print("---")
+    print(morse_coder.morse_tree.preorder())
+    print("---")
+    print("Encoding '1'")
+    print("Expected: .----")
+    print("Encoded : {}".format(morse_coder.encode("/")))
     print("---")
     print("Encoding 'data structures'")
     print("Expected: -.. .- - .- ... - .-. ..- -.-. - ..- .-. . ... ")
