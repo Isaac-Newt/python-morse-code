@@ -29,45 +29,22 @@ class MainWindow(Gtk.Window):
         """Initialize Application"""
         # Create morse code tree
         # Should fix this path, as it's based on the root of the current terminal view.
-        self.morse_coder = Coder("Morse Code Transcriber/resources/morse.txt")
+        self.morse_coder = Coder("resources/morse.txt")
 
         # Window title
-        Gtk.Window.__init__(self, title="Morse Code Generator")
+        Gtk.Window.__init__(self, title="Morse Code Transcriber")
 
         # Window padding
         self.set_border_width(10)
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
-        self.add(box)
+        self.set_default_size(400, 150)
+        self.main_area = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        self.add(self.main_area)
 
-        # Build the Stack
-        self.initialize_stack()
+        # Build window contents
+        self.build_main_view()
 
-        # Label
-        label = Gtk.Label()
-        label.set_markup("<big>This Text Is HUGE!</big>")
-
-        # Label the second stack
-        self.main_area.add_titled(label, "label_name", "big label")
-
-        # StackSwitcher (Tabs)
-        stack_switcher = Gtk.StackSwitcher()
-        stack_switcher.set_stack(self.main_area)
-        box.pack_start(stack_switcher, True, True, 0)
-        box.pack_start(self.main_area, True, True, 0)
-
-    def initialize_stack(self):
-        """Build the stack and its contents"""
-        # Setup stack
-        self.main_area = Gtk.Stack()
-        self.main_area.set_transition_type(Gtk.StackTransitionType.SLIDE_LEFT_RIGHT)
-        self.main_area.set_transition_duration(250)
-
-        # Create stack pages
-        self.create_first_stack()
-        # self.create_second_stack()
-
-    def create_first_stack(self):
-        """Build the first stack (text to morse)"""
+    def build_main_view(self):
+        """Build the Page"""
         self.letters_to_morse = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
 
         # Input form
@@ -86,16 +63,15 @@ class MainWindow(Gtk.Window):
         output_box = self.build_text_box("Morse Transcription:", self.morse_output)
         self.letters_to_morse.pack_start(output_box, True, True, 0)
 
-        # add_titled for section labels.  2nd item = ID, third = section label
-        self.main_area.add_titled(self.letters_to_morse, "let_to_mor", "To Morse Code")
+        self.main_area.pack_start(self.letters_to_morse, True, True, 0)
 
-    def build_text_box(self, label: str, box_function):
+    def build_text_box(self, label_text: str, box_function):
         """Create a Gtk.Entry() element (i.e. text box)"""
-        hbox = Gtk.Box(spacing=8)
-        box_label = Gtk.Label(label)
-        hbox.pack_start(box_label, True, True, 0)
-        hbox.pack_start(box_function, True, True, 0)
-        return hbox
+        horizontal_box = Gtk.Box(spacing=8)
+        box_label = Gtk.Label(label_text)
+        horizontal_box.pack_start(box_label, True, True, 0)
+        horizontal_box.pack_start(box_function, True, True, 0)
+        return horizontal_box
 
     def to_morse(self, input_text: str):
         """Convert text to Morse Code"""
@@ -104,12 +80,11 @@ class MainWindow(Gtk.Window):
 
     def display_morse(self, input_text):
         """Display converted text in the output box"""
-        input_text = self.text_input.get_text()
+        input_text = str(self.text_input.get_text())
         input_text = input_text.lower()
         print(input_text)
         morse_string = self.to_morse(input_text)
         self.morse_output.set_text(morse_string)
-        
 
 
 WINDOW = MainWindow()
