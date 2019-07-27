@@ -37,7 +37,6 @@ class Coder:
 
             # Add letter to the tree
             self.follow_and_insert(code, letter)
-            print(letter)
 
     def follow_and_insert(self, code_str: str, letter: str):
         """Follow the tree and insert a letter"""

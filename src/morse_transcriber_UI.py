@@ -28,8 +28,8 @@ class MainWindow(Gtk.Window):
     def __init__(self):
         """Initialize Application"""
         # Create morse code tree
-        # Should fix this path, as it's based on the root of the current terminal view.
-        self.morse_coder = Coder("resources/morse.txt")
+        # Path is dependent on CWD, so works if in project root
+        self.morse_coder = Coder("src/resources/morse.txt")
 
         # Window title
         Gtk.Window.__init__(self, title="Morse Code Transcriber")
