@@ -35,8 +35,8 @@ class MainWindow(Gtk.Window):
         Gtk.Window.__init__(self, title="Morse Code Transcriber")
 
         # Window padding
-        self.set_border_width(10)
-        self.set_default_size(400, 150)
+        self.set_border_width(15)
+        self.set_default_size(600, 150)
         self.main_area = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.add(self.main_area)
 
@@ -49,6 +49,8 @@ class MainWindow(Gtk.Window):
 
         # Input form
         self.text_input = Gtk.Entry()
+        # self.text_input = Gtk.TextView()
+        # self.text_input_buffer = self.text_input.get_buffer()
         input_box = self.build_text_box("Enter Text:", self.text_input)
         self.letters_to_morse.pack_start(input_box, True, True, 0)
 
@@ -81,6 +83,7 @@ class MainWindow(Gtk.Window):
     def display_morse(self, input_text):
         """Display converted text in the output box"""
         input_text = str(self.text_input.get_text())
+        # input_text = str(self.text_input_buffer.get_text(self.text_input_buffer.get_start_iter(), self.text_input_buffer.get_end_iter(), True))
         input_text = input_text.lower()
         print(input_text)
         morse_string = self.to_morse(input_text)
