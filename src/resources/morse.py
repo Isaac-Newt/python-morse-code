@@ -16,8 +16,11 @@ a Binary Tree data structure.
 #!/usr/bin/env python3
 # encoding: UTF-8
 
+# binary tree data structure
 from .binary_tree import BinaryTree
 
+# Morse Code Paths
+from .morse_codes import list_of_codes
 
 class Coder:
     """Morse Code Encoder/Decoder"""
@@ -25,8 +28,9 @@ class Coder:
     def __init__(self, file_in: str):
         """Constructor"""
         self.morse_tree = BinaryTree("")
-        input_file = open(file_in, "r")
-        for line in input_file:
+        
+        # Access morse code paths from morse_codes
+        for line in list_of_codes:
             # Get the line
             line = line.strip()
 
