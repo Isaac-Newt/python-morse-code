@@ -15,6 +15,11 @@ This is a morse code transcriber built using Python 3, with a GTK3 UI using Pyth
 
 - PyGObject (i.e. Ubuntu: python3-gi, openSUSE: python3-gobject)
 
+## Running the Program
+
+From the project root, run:
+
+`python3 src/morse_transcriber_UI.py`
 
 ## License
 
