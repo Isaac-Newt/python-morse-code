@@ -1,2 +1,3 @@
 # Ignore vscodium stuff
 **/.vscode
+**/.mypy_cache
