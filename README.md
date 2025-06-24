@@ -2,6 +2,8 @@
 
 GTK3 Frontend to a Morse Code transcriber in Python 3.
 
+![Screenshot of application](morse_code.png)
+
 ## About
 
 This is a morse code transcriber built using Python 3, with a GTK3 UI using Python-GObject bindings.
